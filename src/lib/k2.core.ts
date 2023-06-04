@@ -19,7 +19,7 @@ class K2Core {
 		this.options = options;
 	}
 
-	validateInitializationData(options: unknown) {
+	validateInitializationData() {
 		const ApiOptionsData = z.object({
 			clientId: z.string(),
 			clientSecret: z.string(),
@@ -27,7 +27,7 @@ class K2Core {
 			baseUrl: z.string()
 		});
 	
-		const isValidData = ApiOptionsData.parse(options);
+		const isValidData = ApiOptionsData.parse(this.options);
 	
 		return isValidData;
 	};

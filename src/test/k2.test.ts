@@ -1,6 +1,6 @@
-import { K2, K2Options } from "../k2";
+import { Kopokopo, K2Options } from "@kopokopo/k2/lib/k2.core";
 
-describe('K2 module initialization', () => {
+describe('Kopokopo module initialization', () => {
 	const testCredentials: K2Options = {
 		clientId: "",
 		clientSecret: "",
@@ -9,7 +9,7 @@ describe('K2 module initialization', () => {
 	}
 
 	it('runs a test', () => {
-		expect(() => K2({
+		expect(() => Kopokopo({
 			clientId: "",
 			clientSecret: "",
 			apiKey: "",

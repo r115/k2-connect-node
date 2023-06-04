@@ -4,7 +4,7 @@
   "description": "This is a Kopokopo module that allows you to consume our APIs",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.build.json",
     "test": "jest"
   },
   "author": "Nicollet Njora <nicollet.njora05@gmail.com> (https://www.nicolletnjora.com)",
