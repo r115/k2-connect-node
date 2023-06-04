@@ -1,5 +1,5 @@
-const _ = require('lodash')
-const validate = require('validate.js')
+import { cloneDeep } from "lodash";
+import { z } from "zod";
 
 const Webhooks = require('./webhooks').Webhooks
 const StkService = require('./stk').StkService
@@ -17,39 +17,17 @@ type K2Options = {
 }
 
 export function K2(options: K2Options) {
-	this.options = _.cloneDeep(options)
+	const ApiOptionsData = z.object({
+		clientId: z.string(),
+		clientSecret: z.string(),
+		apiKey: z.string(),
+		baseUrl: z.string()
+	});
 
-	validate.validators.isString = function (value) {
-		if (validate.isEmpty(value) || validate.isString(value)) {
-			return null
-		} else {
-			return 'must be a string'
-		}
-	}
-
-	var constraints = {
-		clientId: {
-			presence: true,
-			isString: true
-		},
-		clientSecret: {
-			presence: true,
-			isString: true
-		},
-		baseUrl: {
-			presence: true,
-			isString: true
-		},
-		apiKey: {
-			presence: true,
-			isString: true
-		}
-	}
-
-	const error = validate(this.options, constraints)
-	if (error) {
-		throw error
-	}
+	const validateOptionsData = (options: unknown) => {
+		const isValidData = ApiOptionsData.parse(options);
+		return isValidData;
+	};
 
 	var version = "v1"
 	var versionedOptions = _.cloneDeep(options)
