@@ -6,7 +6,7 @@ describe('Initialization', function() {
 
 	it('validates options', function() {
 		(function() {
-			require('../lib')(TEST_ACCOUNT)
+			require('..')(TEST_ACCOUNT)
 		}).should.throw()
 	})
 })

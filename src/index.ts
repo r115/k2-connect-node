@@ -1,4 +1,3 @@
-'use strict'
 const _ = require('lodash')
 const validate = require('validate.js')
 
@@ -10,18 +9,14 @@ const TransferService = require('./transfer').TransferService
 const PollingService = require('./polling').PollingService
 const SmsNotificationService = require('./sms_notification').SmsNotificationService
 
-/**
- * This is the entry point for the k2-connect-node module
- * The options object is passed to other classes that needs authentication
- * @exports K2
- * @constructor
- * @param {object} options
- * @param {string} options.clientId - The client id of the merchant.
- * @param {string} options.clientSecret - The client secret of the merchant.
- * @param {string} options.apiKey - The api key of the merchant.
- * @param {string} options.baseUrl - The url to send requests to.
-*/
-function K2(options) {
+type K2Options = {
+	clientId: string;
+	clientSecret: string;
+	apiKey: string;
+	baseUrl: string;
+}
+
+export function K2(options: K2Options) {
 	this.options = _.cloneDeep(options)
 
 	validate.validators.isString = function (value) {
@@ -67,9 +62,4 @@ function K2(options) {
 	this.TransferService = new TransferService(versionedOptions)
 	this.PollingService = new PollingService(versionedOptions)
 	this.SmsNotificationService = new SmsNotificationService(versionedOptions)
-}
-
-// To make the class accesible from outside the file
-module.exports = function (options) {
-	return new K2(options)
 }

@@ -13,7 +13,7 @@ describe('SmsNotificationService', function () {
 	this.timeout(5000)
 
 	before(function () {
-		k2 = require('../lib')(TEST_ACCOUNT)
+		k2 = require('..')(TEST_ACCOUNT)
 		sms_notification = k2.SmsNotificationService
 	})
 
