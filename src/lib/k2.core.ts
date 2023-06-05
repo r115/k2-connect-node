@@ -1,5 +1,6 @@
 import axios from "axios";
 import { validateInitializationData } from "./validators";
+import { AuthorizationToken } from "./authorization/types";
 
 export type K2Options = {
 	clientId: string;
@@ -39,15 +40,35 @@ class K2Core {
 	 * 
 	 * @returns string
 	 */
-	async authorize() {
+	async authorize(): Promise<AuthorizationToken> {
 		const requestBody = {
 			client_id: this.options.clientId,
 			client_secret: this.options.clientSecret,
 			grant_type: 'client_credentials'
 		}
 
-		const req = axios.post(`${this.baseUrl()}/oauth/token`)
-		return "Authorized";
+		const req = await axios.post(`${this.baseUrl()}/oauth/token`, requestBody);
+
+		return req.data;
+	}
+
+	/**
+	 * @todo catch API errors.
+	 * @todo add a timeout for API requests.
+	 * 
+	 * @param token 
+	 * @returns 
+	 */
+	async revokeAuthorization(token: string) {
+		const requestBody = {
+			client_id: this.options.clientId,
+			client_secret: this.options.clientSecret,
+			token
+		}
+
+		const req = await axios.post(`${this.baseUrl()}/oauth/revoke`, requestBody);
+
+		return req.data;
 	}
 }
 
