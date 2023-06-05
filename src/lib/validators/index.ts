@@ -1,17 +1,18 @@
-import { z } from "zod";
 import { K2Options } from "../k2.core";
+import Joi from "joi";
 
 export function validateInitializationData(options: K2Options) {
-    const ApiOptionsData = z.object({
-        clientId: z.string(),
-        clientSecret: z.string(),
-        apiKey: z.string(),
-        baseUrl: z.string()
+    const schema = Joi.object({
+        clientId: Joi.string().min(3),
+        clientSecret: Joi.string().min(1),
+        apiKey: Joi.string().min(1)
     });
 
-    const isValidData = ApiOptionsData.parse(options);
+    const { error } = schema.validate(options);
+    
+    if (error) {
+        throw new Error(error.message);
+    }
 
-    console.log(isValidData);
-
-    return isValidData;
+    return true;
 };
