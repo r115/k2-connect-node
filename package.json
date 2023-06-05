@@ -10,6 +10,7 @@
   "author": "Nicollet Njora <nicollet.njora05@gmail.com> (https://www.nicolletnjora.com)",
   "license": "MIT",
   "dependencies": {
+    "joi": "^17.9.2",
     "lodash": "^4.17.20",
     "unirest": "^0.6.0",
     "zod": "^3.21.4"

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { validateInitializationData } from "./validators";
 
 export type K2Options = {
 	clientId: string;
@@ -18,19 +18,6 @@ class K2Core {
 	constructor(options: K2Options) {
 		this.options = options;
 	}
-
-	validateInitializationData() {
-		const ApiOptionsData = z.object({
-			clientId: z.string(),
-			clientSecret: z.string(),
-			apiKey: z.string(),
-			baseUrl: z.string()
-		});
-	
-		const isValidData = ApiOptionsData.parse(this.options);
-	
-		return isValidData;
-	};
 }
 
 export function Kopokopo(options: K2Options) {
