@@ -1,8 +1,8 @@
 # Kopokopo Node.js SDK
 
-[![NPM](https://nodei.co/npm/k2-connect-node.png)](https://npmjs.com/package/k2-connect-node)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/58b5d7c47e924790a13eebceeb5f72c8)](https://app.codacy.com/gh/r115/k2-connect-node/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
-This is a module to assist developers in consuming Kopokopo's API
+This is a module to assist developers in consuming Kopokopo's API rewritten in Typescript
 
 ## Installation
 

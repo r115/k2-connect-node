@@ -1,6 +1,6 @@
 import axios from "axios";
 import { validateInitializationData } from "./validators";
-import { AuthorizationToken } from "./authorization/types";
+import { AuthorizationToken, IntrospectedAuthorizationToken } from "./authorization/types";
 
 export type K2Options = {
 	clientId: string;
@@ -59,7 +59,7 @@ class K2Core {
 	 * @param token 
 	 * @returns 
 	 */
-	async revokeAuthorization(token: string) {
+	async revokeAuthorizationToken(token: string): Promise<object> {
 		const requestBody = {
 			client_id: this.options.clientId,
 			client_secret: this.options.clientSecret,
@@ -67,6 +67,25 @@ class K2Core {
 		}
 
 		const req = await axios.post(`${this.baseUrl()}/oauth/revoke`, requestBody);
+
+		return req.data;
+	}
+
+	/**
+	 * @todo catch API errors.
+	 * @todo add a timeout for API requests.
+	 * 
+	 * @param token 
+	 * @returns 
+	 */
+	async introspectAuthorizationToken(token: string): Promise<IntrospectedAuthorizationToken> {
+		const requestBody = {
+			client_id: this.options.clientId,
+			client_secret: this.options.clientSecret,
+			token
+		}
+
+		const req = await axios.post(`${this.baseUrl()}/oauth/introspect`, requestBody);
 
 		return req.data;
 	}
